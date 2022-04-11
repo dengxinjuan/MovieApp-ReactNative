@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';
+import StarRating from 'react-native-star-rating';
 import {
   StyleSheet,
   ScrollView,
@@ -32,8 +33,9 @@ useEffect(()=>{
   return (
     <React.Fragment>
         {!loaded && <ActivityIndicator size="large" />}
-      <ScrollView>
-      {loaded&&  <Image
+
+      {loaded && <ScrollView>
+       <Image
               resizeMode="cover"
               style={styles.image}
               source={
@@ -45,8 +47,30 @@ useEffect(()=>{
                     }
                   : placeholderImage
               }
-            />}
-      </ScrollView>
+            />
+            <View style={styles.container}>
+           <Text style={styles.movieTitle}>{movieDetail.title}</Text>
+           {movieDetail.genres && (
+                <View style={styles.genresContainer}>
+                  {movieDetail.genres.map(genre => {
+                    return (
+                      <Text style={styles.genre} key={genre.id}>
+                        {genre.name}
+                      </Text>
+                    );
+                  })}
+                </View>
+              )}
+              
+           </View>
+           <StarRating
+                disabled={true}
+                maxStars={5}
+                starSize={30}
+                rating={movieDetail.vote_average / 2}
+                fullStarColor={'gold'}
+              />
+      </ScrollView>}
 
     
     </React.Fragment>
