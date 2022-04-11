@@ -12,6 +12,7 @@ import {
   Pressable,
 } from 'react-native';
 import {getMovie} from '../services/services';
+import dateFormat from 'dateformat';
 
 
 const height = Dimensions.get('screen').height;
@@ -32,48 +33,56 @@ useEffect(()=>{
 
   return (
     <React.Fragment>
-        {!loaded && <ActivityIndicator size="large" />}
-
-      {loaded && <ScrollView>
-       <Image
-              resizeMode="cover"
-              style={styles.image}
-              source={
-                movieDetail.poster_path
-                  ? {
-                      uri:
-                        'https://image.tmdb.org/t/p/w500' +
-                        movieDetail.poster_path,
-                    }
-                  : placeholderImage
-              }
+    {loaded && (
+      <View>
+        <ScrollView>
+          <Image
+            resizeMode="cover"
+            style={styles.image}
+            source={
+              movieDetail.poster_path
+                ? {
+                    uri:
+                      'https://image.tmdb.org/t/p/w500' +
+                      movieDetail.poster_path,
+                  }
+                : placeholderImage
+            }
+          />
+          <View style={styles.container}>
+           
+            <Text style={styles.movieTitle}>{movieDetail.title}</Text>
+            {movieDetail.genres && (
+              <View style={styles.genresContainer}>
+                {movieDetail.genres.map(genre => {
+                  return (
+                    <Text style={styles.genre} key={genre.id}>
+                      {genre.name}
+                    </Text>
+                  );
+                })}
+              </View>
+            )}
+            <StarRating
+              disabled={true}
+              maxStars={5}
+              starSize={30}
+              rating={movieDetail.vote_average / 2}
+              fullStarColor={'gold'}
             />
-            <View style={styles.container}>
-           <Text style={styles.movieTitle}>{movieDetail.title}</Text>
-           {movieDetail.genres && (
-                <View style={styles.genresContainer}>
-                  {movieDetail.genres.map(genre => {
-                    return (
-                      <Text style={styles.genre} key={genre.id}>
-                        {genre.name}
-                      </Text>
-                    );
-                  })}
-                </View>
-              )}
-              
-           </View>
-           <StarRating
-                disabled={true}
-                maxStars={5}
-                starSize={30}
-                rating={movieDetail.vote_average / 2}
-                fullStarColor={'gold'}
-              />
-      </ScrollView>}
+            <Text style={styles.overview}>{movieDetail.overview}</Text>
 
+            <Text style={styles.release}>
+              {'Release date: ' +
+                dateFormat(movieDetail.release_date, 'mmmm dS, yyyy')}
+            </Text>
+          </View>
+        </ScrollView>
     
-    </React.Fragment>
+      </View>
+    )}
+    {!loaded && <ActivityIndicator size="large" />}
+  </React.Fragment>
   );
 };
 
