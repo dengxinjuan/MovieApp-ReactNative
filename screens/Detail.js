@@ -23,6 +23,7 @@ const Detail = ({route,navigation}) => {
   const {movieId} = route.params;
   const [movieDetail,setMovieDetail] = useState();
   const [loaded, setLoaded] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
 
 useEffect(()=>{
@@ -30,7 +31,11 @@ useEffect(()=>{
     setMovieDetail(movieData);
     setLoaded(true)
   })
-},[movieId])
+},[movieId]);
+
+const videoShown = () => {
+  setModalVisible(!modalVisible);
+};
 
   return (
     <React.Fragment>
@@ -55,7 +60,7 @@ useEffect(()=>{
           <View style={styles.container}>
 
           <View style={styles.playButton}>
-                <PlayButton />
+          <PlayButton handlePress={videoShown} />
               </View>
            
             <Text style={styles.movieTitle}>{movieDetail.title}</Text>
@@ -85,6 +90,14 @@ useEffect(()=>{
             </Text>
           </View>
         </ScrollView>
+        <Modal
+            supportedOrientations={['portrait', 'landscape']}
+            animationType="slide"
+            visible={modalVisible}>
+            <View style={styles.videoModal}>
+              <Pressable onPress={()=>videoShown()}><Text>close modal</Text></Pressable>
+            </View>
+          </Modal>
     
       </View>
     )}
