@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import {getMovie} from '../services/services';
 import dateFormat from 'dateformat';
+import PlayButton from '../components/PlayButton';
 
 
 const height = Dimensions.get('screen').height;
@@ -49,7 +50,13 @@ useEffect(()=>{
                 : placeholderImage
             }
           />
+        
+       
           <View style={styles.container}>
+
+          <View style={styles.playButton}>
+                <PlayButton />
+              </View>
            
             <Text style={styles.movieTitle}>{movieDetail.title}</Text>
             {movieDetail.genres && (
