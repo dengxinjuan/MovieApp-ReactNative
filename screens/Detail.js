@@ -14,6 +14,7 @@ import {
 import {getMovie} from '../services/services';
 import dateFormat from 'dateformat';
 import PlayButton from '../components/PlayButton';
+import VideoPlayer from 'react-native-video-controls';
 
 
 const height = Dimensions.get('screen').height;
@@ -95,8 +96,24 @@ const videoShown = () => {
             animationType="slide"
             visible={modalVisible}>
             <View style={styles.videoModal}>
-              <Pressable onPress={()=>videoShown()}><Text>close modal</Text></Pressable>
+              <Pressable onPress={()=>videoShown()}>
+
+ <Text>Close</Text>
+
+              </Pressable>
+         
             </View>
+
+            <Text><VideoPlayer
+ onBack={()=>videoShown()}
+  source={{uri: 'https://vjs.zencdn.net/v/oceans.mp4'}}
+  navigator={navigation}
+  
+/>;</Text>
+
+
+  
+       
           </Modal>
     
       </View>
