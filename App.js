@@ -20,9 +20,18 @@ const App = () => {
 
   return (
     <NavigationContainer>
-    <Stack.Navigator>
-    <Stack.Screen name="Home" component={Home} />
+    <Stack.Navigator headerMode={'screen'}>
     <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerTransparent: true,
+            header: ({navigation}) => (
+              <Navbar navigation={navigation} main={true} />
+            ),
+          }}
+        />
+        <Stack.Screen
           name="Detail"
           component={Detail}
           options={{
