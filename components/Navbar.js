@@ -31,10 +31,8 @@ class Navbar extends React.PureComponent {
               source={require('../assets/images/movies.png')}
             />
             <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Search');
-              }}>
-              <Icon name={'search-outline'} size={30} color={'black'} />
+            >
+              <Icon name={'search-circle'} size={30} color={'black'} />
             </TouchableOpacity>
           </View>
         ) : (
