@@ -15,7 +15,7 @@ import {getMovie} from '../services/services';
 import dateFormat from 'dateformat';
 import PlayButton from '../components/PlayButton';
 import Video from '../components/Video';
-import VideoPlayer from 'react-native-video-controls';
+
 
 
 const height = Dimensions.get('screen').height;
