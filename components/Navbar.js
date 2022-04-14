@@ -30,7 +30,9 @@ class Navbar extends React.PureComponent {
               style={styles.logo}
               source={require('../assets/images/movies.png')}
             />
-            <TouchableOpacity
+            <TouchableOpacity onPress={() => {
+                navigation.navigate('Search');
+              }}
             >
           <Image
               style={styles.search}
