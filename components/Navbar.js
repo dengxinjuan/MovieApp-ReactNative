@@ -32,7 +32,10 @@ class Navbar extends React.PureComponent {
             />
             <TouchableOpacity
             >
-              <Icon name={'search-circle'} size={30} color={'black'} />
+          <Image
+              style={styles.search}
+              source={require('../assets/images/search.png')}
+            />
             </TouchableOpacity>
           </View>
         ) : (
@@ -62,6 +65,11 @@ const styles = StyleSheet.create({
       width: 35,
       height: 35,
     },
+    search:{
+   
+      width: 35,
+      height: 35
+    }
   });
   
   Navbar.propTypes = propTypes;
